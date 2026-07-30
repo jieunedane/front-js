@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" placeholder="채팅">
+  <button>입력</button>
+</body>
+<script>
+  // 사용자가 채팅에 "바보"라고 입력하면 경고창 띄우고 싶다.
+  const input = document.querySelector("input")
+  const button = document.querySelector("button")
+
+
+  button.addEventListener("click", (e) => {
+    try {
+      if(input.value.includes("바보")) {
+        // throw: Error를 강제로 발생
+        throw new Error("바보라고 하지마")
+      }
+    } catch (error) {
+      alert("바보라고 하지마세욘")
+    }
+  })
+</script>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fetch 화면에 출력 실습</title>
+    <style>
+        #wrap {
+            display: flex;
+            flex-wrap: wrap;
+            width: 540px;
+            gap: 10px;
+        }
+
+        .img {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>  
+    <ul id="wrap"></ul>
+</body>
+<script>
+        // https://picsum.photos/v2/list?page=1&limit=10
+        // 1. fetch 함수 만들고 
+        // 2. fetch 함수 사용해서 데이터 요청
+        // 3. download_url을 이용해서 이미지들을 화면에 출력하고
+        // 4. 이미지들을 2행 5열 스타일 넣기
+        const ul = document.querySelector("#wrap")
+        
+        const getImages = async () => {
+            const response = await fetch("https://picsum.photos/v2/list?page=1&limit=10")
+            const images = await response.json()
+            const urls = await images.map(({download_url}) => download_url)
+            return urls
+        }
+
+        getImages()
+            .then((urls) => {
+                urls.forEach((url) => {
+                    const img = `<img class="img" src=${url} />`
+                    ul.innerHTML += img
+                })
+            })
+</script>
+</html>
